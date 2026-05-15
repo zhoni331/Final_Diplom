@@ -29,7 +29,7 @@ load_dotenv(BASE_DIR / 'local.env')
 SECRET_KEY = 'django-insecure-it3l1q+#@0x1!^j7sz8ctzv^9^7kn*(8v+zp(ibdo$=x53l60*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = [
     "diplom-project-tq0t.onrender.com",
     "localhost",

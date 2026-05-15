@@ -1,5 +1,17 @@
 {
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
+  ],
+
+  "headers": [
+    {
+      "source": "/(.*).map",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
   ]
 }
