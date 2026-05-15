@@ -14,6 +14,8 @@ export default function HomePage() {
       .finally(() => setLoading(false));
   }, []);
 
+  console.log("JOBS TYPE:", typeof jobs, "IS ARRAY:", Array.isArray(jobs), "VALUE:", jobs);
+
   return (
     <div className="page-shell">
       <section className="hero-section">
