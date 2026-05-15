@@ -81,6 +81,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://diplom-project-pgr5j3qn8-zhoni331s-projects.vercel.app",
     "https://final-diplom-j1nl5ksun-zhoni331s-projects.vercel.app",
     "https://final-diplom.vercel.app",
+    "https://final-diplom-67xuzkf0k-zhoni331s-projects.vercel.app" ##current touch
 ]
 CORS_ALLOW_CREDENTIALS = True
 
