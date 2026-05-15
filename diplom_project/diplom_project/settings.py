@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-it3l1q+#@0x1!^j7sz8ctzv^9^7kn*(8v+zp(ibdo$=x53l60*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 ALLOWED_HOSTS = [
-    "https://diplom-project-tq0t.onrender.com",
+    "diplom-project-tq0t.onrender.com",
     "localhost",
     "127.0.0.1",
     ]

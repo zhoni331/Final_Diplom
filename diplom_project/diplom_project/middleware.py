@@ -1,5 +1,6 @@
 
 import logging
+from django.conf import settings
 logger = logging.getLogger(__name__)
 
 class DebugRequestMiddleware:
@@ -15,6 +16,7 @@ class DebugRequestMiddleware:
         logger.debug(f"X-Forwarded-For: {request.META.get('HTTP_X_FORWARDED_FOR')}")
         logger.debug(f"SERVER_NAME: {request.META.get('SERVER_NAME')}")
         logger.debug(f"is_secure: {request.is_secure()}")
+        logger.debug(f"ALLOWED_HOSTS value: {settings.ALLOWED_HOSTS}")
         
         response = self.get_response(request)
         
