@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+
+  backend:
+    env_file: ./diplom_project/docker.env
+    build: ./diplom_project
+    container_name: freelance_backend_dis
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             gunicorn diplom_project.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - ./diplom_project:/diplom_project
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    container_name: freelance_frontend_dis
+    ports:
+      - "5173:5173"
+    stdin_open: true
+    tty: true
+
+  db:
+    image: postgres:17
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    container_name: freelance_db_dis
+    restart: always
+    environment:
+      POSTGRES_DB: freelance_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
