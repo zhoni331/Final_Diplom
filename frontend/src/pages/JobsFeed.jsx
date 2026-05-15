@@ -30,7 +30,7 @@ export default function JobsFeed() {
       </div>
       {loading ? <div className="loading-state">Loading jobs</div> : jobs.length ? (
         <div className="jobs-grid">
-          {jobs.map((job) => (
+          {(Array.isArray(jobs) ? jobs : []).map((job) => (
             <article key={job.id} className="job-card">
               <div className="job-meta"><span className="badge">${job.budget}</span><span className="status-pill">{job.status}</span></div>
               <h3>{job.title}</h3>
