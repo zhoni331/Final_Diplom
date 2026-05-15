@@ -5,8 +5,8 @@ const API_URL = import.meta.env.VITE_API_URL
 const API_URL_LOCAL = import.meta.env.VITE_API_URL_LOCAL
 
 const api = axios.create({
-    baseURL:    "http://127.0.0.1:8000",
-    //baseURL: API_URL,
+    //baseURL:    "http://127.0.0.1:8000",
+    baseURL: API_URL,
 });
 
 api.interceptors.request.use((config) => {

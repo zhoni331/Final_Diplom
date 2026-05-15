@@ -28,8 +28,8 @@ load_dotenv(BASE_DIR / 'local.env')
 SECRET_KEY = 'django-insecure-it3l1q+#@0x1!^j7sz8ctzv^9^7kn*(8v+zp(ibdo$=x53l60*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['https://diplom-project-tq0t.onrender.com']
 
 
 # Application definition
@@ -63,6 +63,7 @@ AUTH_USER_MODEL = 'users.User'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "https://diplom-project-pgr5j3qn8-zhoni331s-projects.vercel.app",
+    "https://final-diplom-j1nl5ksun-zhoni331s-projects.vercel.app"
 ]
 CORS_ALLOW_CREDENTIALS = True
 
