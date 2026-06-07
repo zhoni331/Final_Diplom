@@ -11,9 +11,10 @@ export default function JobPage() {
   const [comment, setComment] = useState("");
 
   useEffect(() => {
-    const u = JSON.parse(localStorage.getItem("user"));
-    setUser(u);
-    fetchData();
+    const storedUser = localStorage.getItem("user");
+    const user = storedUser
+    ? JSON.parse(storedUser)
+    : null;
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchData = async () => {
