@@ -37,7 +37,7 @@ ALLOWED_HOSTS = [
     ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = False  # только если хочешь редирект
+SECURE_SSL_REDIRECT = False  
 USE_X_FORWARDED_HOST = True
 
 USE_X_FORWARDED_HOST = True

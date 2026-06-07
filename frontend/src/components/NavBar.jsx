@@ -1,13 +1,14 @@
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export default function NavBar() {
+  const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login");
+    logout();
+    navigate("/home");
   };
 
   return (
@@ -40,6 +41,7 @@ export default function NavBar() {
           </>
         ) : (
           <>
+            <Link to="/">Home</Link>
             <Link to="/login">Login</Link>
             <Link to="/register">Register</Link>
           </>

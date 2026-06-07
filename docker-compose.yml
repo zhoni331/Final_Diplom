@@ -15,7 +15,8 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   frontend:
     build: ./frontend
@@ -35,9 +36,13 @@ services:
       POSTGRES_DB: freelance_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d freelance_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
 volumes:
   postgres_data:

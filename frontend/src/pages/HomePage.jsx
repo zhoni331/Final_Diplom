@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import api from "../services/api";
 import JobCard from "../components/JobCard";
+import { AuthContext } from "../context/AuthContext";
 
 export default function HomePage() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     api.get("/jobs/")
@@ -13,8 +15,6 @@ export default function HomePage() {
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }, []);
-
-  console.log("JOBS TYPE:", typeof jobs, "IS ARRAY:", Array.isArray(jobs), "VALUE:", jobs);
 
   return (
     <div className="page-shell">
@@ -27,7 +27,9 @@ export default function HomePage() {
           </p>
           <div className="hero-actions">
             <Link className="button-primary" to="/jobs">Explore jobs</Link>
-            <Link className="button-secondary" to="/register">Create account</Link>
+            {!user && (
+              <Link className="button-secondary" to="/register">Create account</Link>
+            )}
           </div>
         </div>
         <div className="hero-visual" aria-hidden="true">

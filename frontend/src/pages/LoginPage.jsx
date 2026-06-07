@@ -13,10 +13,11 @@ export default function LoginPage() {
   const handleLogin = async () => {
     try {
       const res = await api.post("/api/token/", { email, password });
-      login(res.data.access);
-      const me = await api.get("/api/me/");
-      localStorage.setItem("user", JSON.stringify(me.data));
-      navigate("/");
+      const me = await api.get("/api/me/", {
+        headers: { Authorization: `Bearer ${res.data.access}` }
+      });
+      login(res.data.access, me.data);
+      navigate("/home");
     } catch (err) {
       console.log("ERROR:", err);
       alert("Ошибка логина");

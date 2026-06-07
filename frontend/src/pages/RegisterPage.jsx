@@ -1,18 +1,24 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api.js";
+import { AuthContext } from "../context/AuthContext";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("client");
 
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const handleRegister = async () => {
     try {
-      await api.post("/api/register/", { email, password, role });
-      alert("Registration successful! Please log in.");
+      const res = await api.post("/api/register/", { email, password, role });
+      login(res.data.access, res.data.user);
+      navigate("/home");
     } catch (error) {
       console.error("Registration failed:", error);
+      alert("Registration failed. Please try again.");
     }
   };
 

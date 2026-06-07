@@ -3,8 +3,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import status
-from .serializers import RegisterSerializer
-from .serializers import UserSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
+from .serializers import RegisterSerializer, UserSerializer
 from .models import User
 from .permissions import IsAdmin
 from .services import (
@@ -39,13 +39,23 @@ class UserViewSet(viewsets.ModelViewSet):
 class RegisterView(APIView):
     permission_classes = [AllowAny]
     authentication_classes = []
+
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
 
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=201)
-        return Response(serializer.errors, status=400)
+            user = serializer.save()
+
+            refresh = RefreshToken.for_user(user)
+            user_data = UserSerializer(user).data
+
+            return Response({
+                "refresh": str(refresh),
+                "access": str(refresh.access_token),
+                "user": user_data
+            }, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class MeView(APIView):
