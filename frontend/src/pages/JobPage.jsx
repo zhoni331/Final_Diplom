@@ -11,11 +11,20 @@ export default function JobPage() {
   const [comment, setComment] = useState("");
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    const user = storedUser
-    ? JSON.parse(storedUser)
-    : null;
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const storedUser = localStorage.getItem("user");
+
+  let user = null;
+
+  if (storedUser && storedUser !== "undefined") {
+    try {
+      user = JSON.parse(storedUser);
+    } catch (e) {
+      console.error("Bad user in localStorage:", storedUser);
+      localStorage.removeItem("user");
+    }
+  }
+
+}, []);
 
   const fetchData = async () => {
     try {
